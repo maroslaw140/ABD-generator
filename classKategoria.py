@@ -9,7 +9,7 @@ class Kategoria:
     def pobierz_nazwy(self):
         try:
             self.kursor.execute("SELECT nazwa FROM kategoria")
-            self.kategorie = self.kursor.fetchall()
+            self.kategorie = [nazwa[0] for nazwa in self.kursor.fetchall()]
         except cx_Oracle.Error as error:
             print(error)
             funkcje.zapisz_blad(error)
