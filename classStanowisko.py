@@ -1,15 +1,15 @@
 import cx_Oracle
 import funkcje
 
-class Seria:
+class Stanowisko:
     def __init__(self, kursor):
         self.kursor = kursor
-        self.serie = []
+        self.stanowiska = []
 
     def pobierz_nazwy(self):
         try:
-            self.kursor.execute("SELECT nazwa FROM seria")
-            self.serie = self.kursor.fetchall()
+            self.kursor.execute("SELECT nazwa FROM stanowisko")
+            self.stanowiska = self.kursor.fetchall()
         except cx_Oracle.Error as error:
             print(error)
             funkcje.zapisz_blad(error)
@@ -17,13 +17,13 @@ class Seria:
     def generuj_dane(self, liczba_danych=1):
         try:
             for _ in range(liczba_danych):
-                nazwa_serii = funkcje.losowy_ciag(255)
+                nazwa_stanowiska = funkcje.losowy_ciag(50)
 
-                while nazwa_serii in self.serie:
-                    nazwa_serii = funkcje.losowy_ciag(255)
+                while nazwa_stanowiska in self.stanowiska:
+                    nazwa_stanowiska = funkcje.losowy_ciag(50)
 
-                self.serie.append(nazwa_serii)
-                self.kursor.execute("""INSERT INTO seria (nazwa) VALUES(:nazwa)""", {'nazwa': nazwa_serii})
+                self.stanowiska.append(nazwa_stanowiska)
+                self.kursor.execute("""INSERT INTO stanowisko (nazwa) VALUES(:nazwa)""", {'nazwa': nazwa_stanowiska})
 
             self.kursor.connection.commit()
 

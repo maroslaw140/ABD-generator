@@ -6,7 +6,7 @@ class Kategoria:
         self.kursor = kursor
         self.kategorie = []
 
-    def pobierz_kategorie(self):
+    def pobierz_nazwy(self):
         try:
             self.kursor.execute("SELECT nazwa FROM kategoria")
             self.kategorie = self.kursor.fetchall()
