@@ -34,3 +34,9 @@ def losowe_nazwisko():
 
 def generuj_kod_pocztowy():
     return f"{random.randint(10, 99)}-{random.randint(100, 999)}"
+
+
+def zapisz_blad(blad):
+    data = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open("bledy.txt", "a") as plik:
+        plik.write(f"{data}: {blad}\n")
