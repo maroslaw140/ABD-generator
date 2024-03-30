@@ -1,6 +1,8 @@
 # APK-DB-generator
 generator danych symulujący działanie aplikacji
 
+https://www.oracle.com/pl/database/technologies/instant-client/winx64-64-downloads.html
+
 
 # Tabele słownikowe
 * status_uzytkownika 
