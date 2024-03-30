@@ -10,7 +10,5 @@ try:
     cursor = connection.cursor()
     print("Połączono z SQLDeveloper :)")
 except cx_Oracle.Error as error:
-    print("Wystąpił błąd podczas łączenia z bazą danych:", error)
-finally:
-    if 'connection' in locals():
-        connection.close()
+    print(error)
+
