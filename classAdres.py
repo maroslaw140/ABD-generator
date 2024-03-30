@@ -16,9 +16,12 @@ class Adres:
                     'miasto': funkcje.losowy_ciag(100, True, False),
                     'kod_pocztowy': funkcje.generuj_kod_pocztowy()
                 }
-                self.kursor.execute("""INSERT INTO adres (ulica, nr_budynku, nr_mieszkania, miasto, kod_pocztowy) VALUES (:ulica, :nr_budynku, :nr_mieszkania, :miasto, :kod_pocztowy)""", adres)
+                self.kursor.execute("""
+                                    INSERT INTO adres (ulica, nr_budynku, nr_mieszkania, miasto, kod_pocztowy) 
+                                    VALUES (:ulica, :nr_budynku, :nr_mieszkania, :miasto, :kod_pocztowy)""", adres)
 
             self.kursor.connection.commit()
+
         except cx_Oracle.Error as error:
             print(error)
             funkcje.zapisz_blad(error)

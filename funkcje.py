@@ -36,6 +36,16 @@ def generuj_kod_pocztowy():
     return f"{random.randint(10, 99)}-{random.randint(100, 999)}"
 
 
+def generuj_mail(domena= "gmail.com", dlugosc=200):
+    uzytkownik = ''.join(random.choices(string.ascii_letters + string.digits, k=dlugosc))
+    return f"{uzytkownik}@{domena}"
+
+
+def generuj_nr_telefonu():
+    numer = ''.join(random.choices('0123456789', k=9))
+    return f"+48 {numer[:3]} {numer[3:6]} {numer[6:]}"
+
+
 def zapisz_blad(blad):
     data = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open("bledy.txt", "a") as plik:

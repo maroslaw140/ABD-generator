@@ -23,7 +23,7 @@ class Seria:
                     nazwa_serii = funkcje.losowy_ciag(255)
 
                 self.serie.append(nazwa_serii)
-                self.kursor.execute("""INSERT INTO seria (nazwa) VALUES(:nazwa)""", {'nazwa': nazwa_serii})
+                self.kursor.execute("""INSERT INTO seria (nazwa) VALUES (:nazwa)""", {'nazwa': nazwa_serii})
 
             self.kursor.connection.commit()
 

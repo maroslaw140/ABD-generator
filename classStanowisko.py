@@ -23,7 +23,7 @@ class Stanowisko:
                     nazwa_stanowiska = funkcje.losowy_ciag(50)
 
                 self.stanowiska.append(nazwa_stanowiska)
-                self.kursor.execute("""INSERT INTO stanowisko (nazwa) VALUES(:nazwa)""", {'nazwa': nazwa_stanowiska})
+                self.kursor.execute("""INSERT INTO stanowisko (nazwa) VALUES (:nazwa)""", {'nazwa': nazwa_stanowiska})
 
             self.kursor.connection.commit()
 
