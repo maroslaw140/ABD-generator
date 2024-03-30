@@ -7,17 +7,27 @@ class Kategoria:
         self.kategorie = []
 
     def pobierz_kategorie(self):
-        self.kursor.execute("SELECT nazwa FROM kategoria")
-        self.kategorie = self.kursor.fetchall()
+        try:
+            self.kursor.execute("SELECT nazwa FROM kategoria")
+            self.kategorie = self.kursor.fetchall()
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)
 
     def generuj_dane(self, liczba_danych=1):
-        for _ in range(liczba_danych):
-            nazwa_kategorii = funkcje.losowy_ciag(50)
-
-            while nazwa_kategorii in self.kategorie:
+        try:
+            for _ in range(liczba_danych):
                 nazwa_kategorii = funkcje.losowy_ciag(50)
 
-            self.kategorie.append(nazwa_kategorii)
-            self.kursor.execute("""INSERT INTO kategoria (nazwa) VALUES(:nazwa)""", {'nazwa': nazwa_kategorii})
+                while nazwa_kategorii in self.kategorie:
+                    nazwa_kategorii = funkcje.losowy_ciag(50)
 
+                self.kategorie.append(nazwa_kategorii)
+                self.kursor.execute("""INSERT INTO kategoria (nazwa) VALUES(:nazwa)""", {'nazwa': nazwa_kategorii})
 
+            self.kursor.connection.commit()
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)
+            self.kursor.connection.rollback()
