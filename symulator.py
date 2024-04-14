@@ -11,6 +11,7 @@ from classStanowisko import Stanowisko
 from classUzytkownik import Uzytkownik
 from classWydanie import Wydanie
 from classWydawnictwo import Wydawnictwo
+from classZamowienie import Zamowienie
 
 generator = Generator()
 generator.polacz()
@@ -67,3 +68,11 @@ opinia = Opinia(generator.kursor)
 opinia.pobierz_wydania_fk()
 opinia.pobierz_klienci_fk()
 opinia.generuj_dane(100)
+
+zamowienie = Zamowienie(generator.kursor)
+zamowienie.pobierz_klienci_fk()
+zamowienie.pobierz_adresy_fk()
+zamowienie.pobierz_pracownicy_fk()
+zamowienie.pobierz_sposoby_dostawy_fk()
+zamowienie.pobierz_statusy_zamowienia_fk()
+zamowienie.generuj_dane(100)
