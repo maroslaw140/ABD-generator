@@ -16,6 +16,7 @@ class Kategoria:
 
     def generuj_dane(self, liczba_danych=1):
         try:
+            dane_do_wstawienia = []
             for _ in range(liczba_danych):
                 nazwa_kategorii = funkcje.losowy_ciag(50)
 
@@ -23,8 +24,9 @@ class Kategoria:
                     nazwa_kategorii = funkcje.losowy_ciag(50)
 
                 self.kategorie.append(nazwa_kategorii)
-                self.kursor.execute("""INSERT INTO kategoria (nazwa) VALUES(:nazwa)""", {'nazwa': nazwa_kategorii})
+                dane_do_wstawienia.append({'nazwa': nazwa_kategorii})
 
+            self.kursor.executemany("""INSERT INTO kategoria (nazwa) VALUES(:nazwa)""", dane_do_wstawienia)
             self.kursor.connection.commit()
 
         except cx_Oracle.Error as error:

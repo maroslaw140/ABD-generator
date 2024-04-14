@@ -17,11 +17,11 @@ def losowy_ciag(max_dl, zawiera_spacje=True, zawiera_cyfry=False):
     except Exception as error:
         zapisz_blad(error)
 
-def generuj_date(liczba_lat=10, format="%Y-%m-%d"):
+def generuj_date(liczba_lat=10):
     try:
         dzisiaj = datetime.now()
         dzien_losowy = dzisiaj - timedelta(days=random.randint(0, 365 * liczba_lat))
-        return f"TO_DATE('{dzien_losowy.strftime(format)}', 'YYYY-MM-DD')"
+        return dzien_losowy
     except Exception as error:
         zapisz_blad(error)
 

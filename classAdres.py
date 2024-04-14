@@ -5,6 +5,7 @@ import random
 class Adres:
     def __init__(self, kursor):
         self.kursor = kursor
+        self.dane_do_wstawienia = []
 
     def generuj_dane(self, liczba_danych=1):
         try:
@@ -16,9 +17,11 @@ class Adres:
                     'miasto': funkcje.losowy_ciag(100, True, False),
                     'kod_pocztowy': funkcje.generuj_kod_pocztowy()
                 }
-                self.kursor.execute("""
+                self.dane_do_wstawienia.append(adres)
+
+            self.kursor.executemany("""
                                     INSERT INTO adres (ulica, nr_budynku, nr_mieszkania, miasto, kod_pocztowy) 
-                                    VALUES (:ulica, :nr_budynku, :nr_mieszkania, :miasto, :kod_pocztowy)""", adres)
+                                    VALUES (:ulica, :nr_budynku, :nr_mieszkania, :miasto, :kod_pocztowy)""", self.dane_do_wstawienia)
 
             self.kursor.connection.commit()
 

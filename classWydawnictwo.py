@@ -4,7 +4,7 @@ import funkcje
 class Wydawnictwo:
     def __init__(self, kursor):
         self.kursor = kursor
-        self.wydawnictwa = []
+        self.dane_do_wstawienia = []
 
     def pobierz_nazwy(self):
         try:
@@ -23,8 +23,9 @@ class Wydawnictwo:
                     nazwa_wydawnictwa = funkcje.losowy_ciag(200)
 
                 self.wydawnictwa.append(nazwa_wydawnictwa)
-                self.kursor.execute("""INSERT INTO wydawnictwo (nazwa) VALUES (:nazwa)""", {'nazwa': nazwa_wydawnictwa})
+                self.dane_do_wstawienia.append({'nazwa': nazwa_wydawnictwa})
 
+            self.kursor.executemany("INSERT INTO wydawnictwo (nazwa) VALUES (:nazwa)", self.dane_do_wstawienia)
             self.kursor.connection.commit()
 
         except cx_Oracle.Error as error:

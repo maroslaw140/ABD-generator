@@ -4,14 +4,17 @@ import funkcje
 class Autor:
     def __init__(self, kursor):
         self.kursor = kursor
+        self.dane_do_wstawienia = []
 
     def generuj_dane(self, liczba_danych=1):
+
         try:
             for _ in range(liczba_danych):
-                self.kursor.execute("""
+                self.dane_do_wstawienia.append((funkcje.losowe_imie(), funkcje.losowe_nazwisko()))
+
+            self.kursor.executemany("""
                                     INSERT INTO autor (imie, nazwisko) 
-                                    VALUES (:imie, :nazwisko)""",
-                                    {'imie': funkcje.losowe_imie(), 'nazwisko': funkcje.losowe_nazwisko()})
+                                    VALUES (:imie, :nazwisko)""", self.dane_do_wstawienia)
 
             self.kursor.connection.commit()
 
