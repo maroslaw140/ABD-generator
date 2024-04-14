@@ -8,6 +8,8 @@ class Pracownik:
         self.stanowiska_fk = []
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO pracownik (imie, nazwisko, telefon, mail, id_stanowisko, data_zatrudnienia) VALUES (:imie, :nazwisko, :telefon, :mail, :id_stanowisko, '{data_zatrudnienia}')"""
+
     def pobierz_stanowiska_fk(self):
         try:
             self.kursor.execute("SELECT id_stanowisko FROM stanowisko")

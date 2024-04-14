@@ -6,17 +6,32 @@ class Rachunek:
     def __init__(self, kursor):
         self.kursor = kursor
         self.zamowienia_fk = []
+        self.wykorzystane_zamowienia_fk = []
         self.sposoby_zaplaty_fk = []
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO rachunek (id_zamowienie, data_wystawienia, id_sposob_zaplaty) VALUES ('{id_zamowienie}', '{data_wystawienia}', '{id_sposob_zaplaty}')"""
+
     def pobierz_zamowienia_fk(self):
         try:
-            self.kursor.execute("SELECT id_zamowienie FROM zamowienie")
+            self.kursor.execute("SELECT id_zamowienie FROM zamowienie MINUS SELECT id_zamowienie FROM rachunek")
             rekordy = self.kursor.fetchall()
             self.zamowienia_fk = [id_zamowienie[0] for id_zamowienie in rekordy]
         except cx_Oracle.Error as error:
             print(error)
             funkcje.zapisz_blad(error)
+
+
+    def pobierz_wykorzystane_zamowienia_fk(self):
+        try:
+            self.kursor.execute("SELECT id_zamowienie FROM rachunek")
+            rekordy = self.kursor.fetchall()
+            self.wykorzystane_zamowienia_fk = [id_zamowienie[0] for id_zamowienie in rekordy]
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)
+
+
 
     def pobierz_sposoby_zaplaty_fk(self):
         try:
@@ -30,7 +45,11 @@ class Rachunek:
         try:
             for _ in range(liczba_danych):
                 zamowienie = random.choice(self.zamowienia_fk)
-                self.zamowienia_fk.remove(zamowienie)
+
+                while zamowienie in self.wykorzystane_zamowienia_fk:
+                    zamowienie = random.choice(self.zamowienia_fk)
+
+                self.wykorzystane_zamowienia_fk.append(zamowienie)
 
                 rachunek = {
                     'id_zamowienie': zamowienie,

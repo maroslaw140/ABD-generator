@@ -6,6 +6,8 @@ class Wydawnictwo:
         self.kursor = kursor
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO wydawnictwo (nazwa) VALUES ('{nazwa}')"""
+
     def pobierz_nazwy(self):
         try:
             self.kursor.execute("SELECT nazwa FROM wydawnictwo")

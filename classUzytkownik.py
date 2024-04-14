@@ -10,6 +10,8 @@ class Uzytkownik:
         self.status_uzytkownika_fk = []
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO uzytkownik (login, haslo, id_pracownik, id_klient, id_status_uzytkownika, data_rejestracji) VALUES ('{login}', '{haslo}', '{id_pracownik}', '{id_klient}', '{id_status_uzytkownika}', '{data_rejestracji}')"""
+
     def pobierz_pracownicy_fk(self):
         try:
             self.kursor.execute("SELECT DISTINCT id_pracownik FROM pracownik MINUS SELECT DISTINCT id_pracownik FROM uzytkownik")

@@ -20,6 +20,13 @@ class Generator:
         except cx_Oracle.Error as error:
             print(error)
 
-
+    def zapisz_insert_do_pliku(self, insert, dane_do_wstawienia):
+        try:
+            with open(self.plik, "a") as file:
+                for dane in dane_do_wstawienia:
+                    formatted_insert = insert.format(**dane) + "\n"
+                    file.write(formatted_insert)
+        except IOError as error:
+            print("Błąd zapisu do pliku:", error)
 
 

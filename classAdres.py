@@ -7,6 +7,8 @@ class Adres:
         self.kursor = kursor
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO adres (ulica, nr_budynku, nr_mieszkania, miasto, kod_pocztowy) VALUES ('{ulica}', {nr_budynku}, {nr_mieszkania}, '{miasto}', '{kod_pocztowy}')"""
+
     def generuj_dane(self, liczba_danych=1):
         try:
             for _ in range(liczba_danych):

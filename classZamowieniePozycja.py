@@ -9,6 +9,8 @@ class ZamowieniePozycja:
         self.wydania_fk = []
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO zamowienie_pozycja (id_zamowienie, id_wydanie, liczba_sztuk) VALUES ('{id_zamowienie}', '{id_wydanie}', '{liczba_sztuk}')"""
+
     def pobierz_zamowienia_fk(self):
         try:
             self.kursor.execute("SELECT id_zamowienie FROM zamowienie")
@@ -37,7 +39,7 @@ class ZamowieniePozycja:
                 self.dane_do_wstawienia.append(zamowienie_pozycja)
 
             self.kursor.executemany("""
-                                INSERT INTO rachunek (id_zamowienie, id_wydanie, liczba_sztuk)
+                                INSERT INTO zamowienie_pozycja (id_zamowienie, id_wydanie, liczba_sztuk)
                                 VALUES (:id_zamowienie, :id_wydanie, :liczba_sztuk)""", self.dane_do_wstawienia)
 
             self.kursor.connection.commit()

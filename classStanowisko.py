@@ -7,6 +7,8 @@ class Stanowisko:
         self.stanowiska = []
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO stanowisko (nazwa) VALUES ('{nazwa}')"""
+
     def pobierz_nazwy(self):
         try:
             self.kursor.execute("SELECT nazwa FROM stanowisko")

@@ -12,6 +12,12 @@ class Zamowienie:
         self.statusy_zamowienia_fk = []
         self.dane_do_wstawienia = []
 
+        self.insert = """
+            INSERT INTO zamowienie 
+            (id_klient, id_adres, data_zamowienia, data_realizacji, data_wyslania, id_pracownik_realizujacy, id_sposob_dostawy, id_status_zamowienia)
+            VALUES ('{id_klient}', '{id_adres}', '{data_zamowienia}', '{data_realizacji}', '{data_wyslania}', '{id_pracownik_realizujacy}', '{id_sposob_dostawy}', '{id_status_zamowienia}')
+        """
+
     def pobierz_klienci_fk(self):
         try:
             self.kursor.execute("SELECT id_klient FROM klient")

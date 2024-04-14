@@ -7,6 +7,8 @@ class Klient:
         self.kursor = kursor
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO klient (imie, nazwisko, telefon, mail) VALUES ('{imie}', '{nazwisko}', '{telefon}', '{mail}')"""
+
     def generuj_dane(self, liczba_danych=1):
         try:
             for _ in range(liczba_danych):

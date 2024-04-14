@@ -9,6 +9,8 @@ class Wydanie:
         self.wydawnictwa_fk = []
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO wydanie (id_ksiazka, isbn, data_wydania, liczba_stron, id_wydawnictwo, cena, wysokosc_mm, dlugosc_mm, szerokosc_mm, liczba_sztuk_mag) VALUES ({id_ksiazka}, '{isbn}', '{data_wydania}', {liczba_stron}, {id_wydawnictwo}, {cena}, {wysokosc_mm}, {dlugosc_mm}, {szerokosc_mm}, {liczba_sztuk_mag})"""
+
     def pobierz_ksiazki_fk(self):
         try:
             self.kursor.execute("SELECT id_ksiazka FROM ksiazka")

@@ -10,6 +10,8 @@ class Ksiazka:
         self.kategorie_fk = []
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO ksiazka (id_autor, tytul, id_seria, id_kategoria) VALUES ('{id_autor}', '{tytul}', '{id_seria}', '{id_kategoria}')"""
+
     def pobierz_autorzy_fk(self):
         try:
             self.kursor.execute("SELECT id_autor FROM autor")

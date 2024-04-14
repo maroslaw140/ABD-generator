@@ -9,6 +9,8 @@ class Opinia:
         self.klienci_fk = []
         self.dane_do_wstawienia = []
 
+        self.insert = """INSERT INTO opinia (id_wydanie, id_klient, tresc, ocena, data_wystawienia) VALUES (:id_wydanie, :id_klient, '{tresc}', {ocena}, '{data_wystawienia}')"""
+
     def pobierz_wydania_fk(self):
         try:
             self.kursor.execute("SELECT id_wydanie FROM wydanie")
