@@ -1,6 +1,7 @@
 import random
 import string
 from datetime import datetime, timedelta
+import names
 
 def losowy_ciag(max_dl, zawiera_spacje=True, zawiera_cyfry=False):
     try:
@@ -27,15 +28,13 @@ def generuj_date(liczba_lat=10):
 
 def losowe_imie():
     try:
-        imiona = ['Adam', 'Barbara', 'Celina', 'Dariusz', 'Ewa', 'Filip', 'Gabriela', 'Henryk', 'Izabela', 'Jan']
-        return random.choice(imiona)
+        return names.get_first_name()
     except Exception as error:
         zapisz_blad(error)
 
 def losowe_nazwisko():
     try:
-        nazwiska = ['Kowalski', 'Nowak', 'Mazur', 'Wójcik', 'Krawczyk', 'Lewandowski', 'Piotrowski', 'Szymański', 'Woźniak']
-        return random.choice(nazwiska)
+        return names.get_last_name()
     except Exception as error:
         zapisz_blad(error)
 
