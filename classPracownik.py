@@ -2,6 +2,7 @@ import cx_Oracle
 import funkcje
 import random
 
+
 class Pracownik:
     def __init__(self, kursor):
         self.kursor = kursor
@@ -33,7 +34,8 @@ class Pracownik:
 
             self.kursor.executemany("""
                                 INSERT INTO pracownik (imie, nazwisko, telefon, mail, id_stanowisko, data_zatrudnienia)
-                                VALUES (:imie, :nazwisko, :telefon, :mail, :id_stanowisko, :data_zatrudnienia)""", self.dane_do_wstawienia)
+                                VALUES (:imie, :nazwisko, :telefon, :mail, :id_stanowisko, :data_zatrudnienia)""",
+                                    self.dane_do_wstawienia)
 
             self.kursor.connection.commit()
 

@@ -10,7 +10,7 @@ https://www.oracle.com/pl/database/technologies/instant-client/winx64-64-downloa
 * sposob_dostawy 
 * sposob_zaplaty 
 
-# Tabele symulatora 
+# Tabele generatora
 * kategoria
 * seria 
 * autor 

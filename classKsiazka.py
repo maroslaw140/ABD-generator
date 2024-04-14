@@ -2,6 +2,7 @@ import random
 import cx_Oracle
 import funkcje
 
+
 class Ksiazka:
     def __init__(self, kursor):
         self.kursor = kursor

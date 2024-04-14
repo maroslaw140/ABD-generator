@@ -1,12 +1,12 @@
 import cx_Oracle
 from dotenv import load_dotenv
 import os
-import csv
 
 
 class Generator:
 
     def __init__(self):
+        self.kursor = None
         self.plik = "plik.txt"
 
     def polacz(self):
@@ -16,7 +16,7 @@ class Generator:
             dsn = cx_Oracle.makedsn(host=os.getenv("db_host"), port=os.getenv("db_port"), service_name=os.getenv("db_service"))
             connection = cx_Oracle.connect(user=os.getenv("db_user"), password=os.getenv("db_password"), dsn=dsn)
             self.kursor = connection.cursor()
-            print("Połączono z SQLDeveloper :)")
+            print("Połączono z bazą")
         except cx_Oracle.Error as error:
             print(error)
 
@@ -31,6 +31,3 @@ class Generator:
                     file.write(linia_insert)
         except IOError as error:
             print("Błąd zapisu do pliku:", error)
-
-
-

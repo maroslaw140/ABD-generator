@@ -1,9 +1,11 @@
 import cx_Oracle
 import funkcje
 
+
 class Wydawnictwo:
     def __init__(self, kursor):
         self.kursor = kursor
+        self.wydawnictwa = []
         self.dane_do_wstawienia = []
 
         self.insert = """INSERT INTO wydawnictwo (nazwa) VALUES ('{nazwa}')"""

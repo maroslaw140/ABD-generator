@@ -2,6 +2,7 @@ import random
 import cx_Oracle
 import funkcje
 
+
 class Zamowienie:
     def __init__(self, kursor):
         self.kursor = kursor
@@ -81,7 +82,7 @@ class Zamowienie:
             self.kursor.executemany("""
                                 INSERT INTO zamowienie (id_klient, id_adres, data_zamowienia, data_realizacji, data_wyslania, id_pracownik_realizujacy, id_sposob_dostawy, id_status_zamowienia)
                                 VALUES (:id_klient, :id_adres, :data_zamowienia, :data_realizacji, :data_wyslania, :id_pracownik_realizujacy, :id_sposob_dostawy, :id_status_zamowienia)""",
-                                self.dane_do_wstawienia)
+                                    self.dane_do_wstawienia)
 
             self.kursor.connection.commit()
 

@@ -2,6 +2,7 @@ import cx_Oracle
 import funkcje
 import random
 
+
 class Adres:
     def __init__(self, kursor):
         self.kursor = kursor
@@ -23,7 +24,8 @@ class Adres:
 
             self.kursor.executemany("""
                                     INSERT INTO adres (ulica, nr_budynku, nr_mieszkania, miasto, kod_pocztowy) 
-                                    VALUES (:ulica, :nr_budynku, :nr_mieszkania, :miasto, :kod_pocztowy)""", self.dane_do_wstawienia)
+                                    VALUES (:ulica, :nr_budynku, :nr_mieszkania, :miasto, :kod_pocztowy)""",
+                                    self.dane_do_wstawienia)
 
             self.kursor.connection.commit()
 

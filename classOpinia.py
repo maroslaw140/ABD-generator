@@ -2,6 +2,7 @@ import random
 import cx_Oracle
 import funkcje
 
+
 class Opinia:
     def __init__(self, kursor):
         self.kursor = kursor
@@ -30,7 +31,6 @@ class Opinia:
     def generuj_dane(self, liczba_danych=1):
         try:
             for _ in range(liczba_danych):
-
                 opinia = {
                     'id_wydanie': random.choice(self.wydania_fk),
                     'id_klient': random.choice(self.klienci_fk),
@@ -42,7 +42,8 @@ class Opinia:
 
             self.kursor.executemany("""
                                 INSERT INTO opinia (id_wydanie, id_klient, tresc, ocena, data_wystawienia)
-                                VALUES (:id_wydanie, :id_klient, :tresc, :ocena, :data_wystawienia)""", self.dane_do_wstawienia)
+                                VALUES (:id_wydanie, :id_klient, :tresc, :ocena, :data_wystawienia)""",
+                                    self.dane_do_wstawienia)
 
             self.kursor.connection.commit()
 

@@ -2,6 +2,7 @@ import random
 import cx_Oracle
 import funkcje
 
+
 class ZamowieniePozycja:
     def __init__(self, kursor):
         self.kursor = kursor
@@ -30,7 +31,6 @@ class ZamowieniePozycja:
     def generuj_dane(self, liczba_danych=1):
         try:
             for _ in range(liczba_danych):
-
                 zamowienie_pozycja = {
                     'id_zamowienie': random.choice(self.zamowienia_fk),
                     'id_wydanie': random.choice(self.wydania_fk),

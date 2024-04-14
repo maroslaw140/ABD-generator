@@ -2,6 +2,7 @@ import random
 import cx_Oracle
 import funkcje
 
+
 class Rachunek:
     def __init__(self, kursor):
         self.kursor = kursor
@@ -21,7 +22,6 @@ class Rachunek:
             print(error)
             funkcje.zapisz_blad(error)
 
-
     def pobierz_wykorzystane_zamowienia_fk(self):
         try:
             self.kursor.execute("SELECT id_zamowienie FROM rachunek")
@@ -30,8 +30,6 @@ class Rachunek:
         except cx_Oracle.Error as error:
             print(error)
             funkcje.zapisz_blad(error)
-
-
 
     def pobierz_sposoby_zaplaty_fk(self):
         try:
@@ -60,7 +58,8 @@ class Rachunek:
 
             self.kursor.executemany("""
                                 INSERT INTO rachunek (id_zamowienie, data_wystawienia, id_sposob_zaplaty)
-                                VALUES (:id_zamowienie, :data_wystawienia, :id_sposob_zaplaty)""", self.dane_do_wstawienia)
+                                VALUES (:id_zamowienie, :data_wystawienia, :id_sposob_zaplaty)""",
+                                    self.dane_do_wstawienia)
 
             self.kursor.connection.commit()
 

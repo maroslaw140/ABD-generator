@@ -1,6 +1,6 @@
 import cx_Oracle
 import funkcje
-import random
+
 
 class Klient:
     def __init__(self, kursor):

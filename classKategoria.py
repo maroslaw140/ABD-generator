@@ -1,6 +1,7 @@
 import cx_Oracle
 import funkcje
 
+
 class Kategoria:
     def __init__(self, kursor):
         self.kursor = kursor

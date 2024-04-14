@@ -2,6 +2,7 @@ import cx_Oracle
 import funkcje
 import random
 
+
 class Uzytkownik:
     def __init__(self, kursor):
         self.kursor = kursor
@@ -14,7 +15,8 @@ class Uzytkownik:
 
     def pobierz_pracownicy_fk(self):
         try:
-            self.kursor.execute("SELECT DISTINCT id_pracownik FROM pracownik MINUS SELECT DISTINCT id_pracownik FROM uzytkownik")
+            self.kursor.execute(
+                "SELECT DISTINCT id_pracownik FROM pracownik MINUS SELECT DISTINCT id_pracownik FROM uzytkownik")
             self.pracownicy_fk = [id_pracownik[0] for id_pracownik in self.kursor.fetchall()]
         except cx_Oracle.Error as error:
             print(error)
@@ -40,7 +42,6 @@ class Uzytkownik:
         try:
             for _ in range(liczba_danych):
 
-                typ = None
                 if self.klienci_fk and self.pracownicy_fk:
                     typ = random.choice(["klient", "pracownik"])
                 elif self.klienci_fk:
@@ -74,7 +75,8 @@ class Uzytkownik:
 
             self.kursor.executemany("""
                                 INSERT INTO uzytkownik (login, haslo, id_pracownik, id_klient, id_status_uzytkownika, data_rejestracji)
-                                VALUES (:login, :haslo, :id_pracownik, :id_klient, :id_status_uzytkownika, :data_rejestracji)""", self.dane_do_wstawienia)
+                                VALUES (:login, :haslo, :id_pracownik, :id_klient, :id_status_uzytkownika, :data_rejestracji)""",
+                                    self.dane_do_wstawienia)
 
             self.kursor.connection.commit()
 
