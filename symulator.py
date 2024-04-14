@@ -4,6 +4,7 @@ from classGenerator import Generator
 from classKategoria import Kategoria
 from classKlient import Klient
 from classKsiazka import Ksiazka
+from classOpinia import Opinia
 from classPracownik import Pracownik
 from classSeria import Seria
 from classStanowisko import Stanowisko
@@ -61,3 +62,8 @@ wydanie = Wydanie(generator.kursor)
 wydanie.pobierz_ksiazki_fk()
 wydanie.pobierz_wydawnictwa_fk()
 wydanie.generuj_dane(100)
+
+opinia = Opinia(generator.kursor)
+opinia.pobierz_wydania_fk()
+opinia.pobierz_klienci_fk()
+opinia.generuj_dane(100)
