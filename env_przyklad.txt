@@ -1,0 +1,7 @@
+
+db_host = 217.173.198.135
+db_port = 1521
+db_service = tpdb
+
+db_user = user
+db_password = haslo
