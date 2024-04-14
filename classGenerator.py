@@ -24,9 +24,13 @@ class Generator:
         try:
             with open(self.plik, "a") as file:
                 for dane in dane_do_wstawienia:
-                    formatted_insert = insert.format(**dane) + "\n"
-                    file.write(formatted_insert)
+                    linia_insert = insert.format(**dane)
+                    if linia_insert[-1] != ';':
+                        linia_insert += ';'
+                    linia_insert += "\n"
+                    file.write(linia_insert)
         except IOError as error:
             print("Błąd zapisu do pliku:", error)
+
 
 
