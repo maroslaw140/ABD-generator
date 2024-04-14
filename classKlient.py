@@ -10,13 +10,13 @@ class Klient:
     def generuj_dane(self, liczba_danych=1):
         try:
             for _ in range(liczba_danych):
-                pracownik = {
+                klient = {
                     'imie': funkcje.losowe_imie(),
                     'nazwisko': funkcje.losowe_nazwisko(),
                     'telefon': funkcje.generuj_nr_telefonu(),
                     'mail': funkcje.generuj_mail(),
                 }
-                self.dane_do_wstawienia.append(pracownik)
+                self.dane_do_wstawienia.append(klient)
 
             self.kursor.executemany("""
                                 INSERT INTO klient (imie, nazwisko, telefon, mail)

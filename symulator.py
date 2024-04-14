@@ -6,6 +6,7 @@ from classKlient import Klient
 from classPracownik import Pracownik
 from classSeria import Seria
 from classStanowisko import Stanowisko
+from classUzytkownik import Uzytkownik
 from classWydawnictwo import Wydawnictwo
 
 generator = Generator()
@@ -41,3 +42,9 @@ wydawnictwo.generuj_dane(0)
 
 klient = Klient(generator.kursor)
 klient.generuj_dane(1000)
+
+uzytkownik = Uzytkownik(generator.kursor)
+uzytkownik.pobierz_pracownicy_fk()
+uzytkownik.pobierz_klienci_fk()
+uzytkownik.pobierz_status_uzytkownika_fk()
+uzytkownik.generuj_dane(1000)
