@@ -8,6 +8,7 @@ from classPracownik import Pracownik
 from classSeria import Seria
 from classStanowisko import Stanowisko
 from classUzytkownik import Uzytkownik
+from classWydanie import Wydanie
 from classWydawnictwo import Wydawnictwo
 
 generator = Generator()
@@ -55,3 +56,8 @@ ksiazka.pobierz_autorzy_fk()
 ksiazka.pobierz_serie_fk()
 ksiazka.pobierz_kategorie_fk()
 ksiazka.generuj_dane(100)
+
+wydanie = Wydanie(generator.kursor)
+wydanie.pobierz_ksiazki_fk()
+wydanie.pobierz_wydawnictwa_fk()
+wydanie.generuj_dane(100)
