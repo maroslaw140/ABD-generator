@@ -5,6 +5,7 @@ class Seria:
     def __init__(self, kursor):
         self.kursor = kursor
         self.serie = []
+        self.dane_do_wstawienia = []
 
     def pobierz_nazwy(self):
         try:
@@ -15,7 +16,6 @@ class Seria:
             funkcje.zapisz_blad(error)
 
     def generuj_dane(self, liczba_danych=1):
-        dane_do_wstawienia = []
         try:
             for _ in range(liczba_danych):
                 nazwa_serii = funkcje.losowy_ciag(255)
@@ -24,9 +24,9 @@ class Seria:
                     nazwa_serii = funkcje.losowy_ciag(255)
 
                 self.serie.append(nazwa_serii)
-                dane_do_wstawienia.append({'nazwa': nazwa_serii})
+                self.dane_do_wstawienia.append({'nazwa': nazwa_serii})
 
-            self.kursor.executemany("INSERT INTO seria (nazwa) VALUES (:nazwa)", dane_do_wstawienia)
+            self.kursor.executemany("INSERT INTO seria (nazwa) VALUES (:nazwa)", self.dane_do_wstawienia)
             self.kursor.connection.commit()
 
         except cx_Oracle.Error as error:

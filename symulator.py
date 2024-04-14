@@ -3,6 +3,7 @@ from classAutor import Autor
 from classGenerator import Generator
 from classKategoria import Kategoria
 from classKlient import Klient
+from classKsiazka import Ksiazka
 from classPracownik import Pracownik
 from classSeria import Seria
 from classStanowisko import Stanowisko
@@ -41,10 +42,16 @@ wydawnictwo.generuj_dane(0)
 # test
 
 klient = Klient(generator.kursor)
-klient.generuj_dane(1000)
+klient.generuj_dane(100)
 
 uzytkownik = Uzytkownik(generator.kursor)
 uzytkownik.pobierz_pracownicy_fk()
 uzytkownik.pobierz_klienci_fk()
 uzytkownik.pobierz_status_uzytkownika_fk()
-uzytkownik.generuj_dane(1000)
+uzytkownik.generuj_dane(100)
+
+ksiazka = Ksiazka(generator.kursor)
+ksiazka.pobierz_autorzy_fk()
+ksiazka.pobierz_serie_fk()
+ksiazka.pobierz_kategorie_fk()
+ksiazka.generuj_dane(100)
