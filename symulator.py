@@ -6,6 +6,7 @@ from classKlient import Klient
 from classKsiazka import Ksiazka
 from classOpinia import Opinia
 from classPracownik import Pracownik
+from classRachunek import Rachunek
 from classSeria import Seria
 from classStanowisko import Stanowisko
 from classUzytkownik import Uzytkownik
@@ -76,3 +77,8 @@ zamowienie.pobierz_pracownicy_fk()
 zamowienie.pobierz_sposoby_dostawy_fk()
 zamowienie.pobierz_statusy_zamowienia_fk()
 zamowienie.generuj_dane(100)
+
+rachunek = Rachunek(generator.kursor)
+rachunek.pobierz_zamowienia_fk()
+rachunek.pobierz_sposoby_zaplaty_fk()
+rachunek.generuj_dane(100)

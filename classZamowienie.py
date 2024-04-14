@@ -59,7 +59,6 @@ class Zamowienie:
                 data_realizacji = funkcje.generuj_date(50)
                 data_wyslania = funkcje.generuj_date(1)
 
-                # Sprawdzanie poprawności dat
                 while data_realizacji < data_zamowienia or data_wyslania < data_realizacji:
                     data_zamowienia = funkcje.generuj_date(100)
                     data_realizacji = funkcje.generuj_date(50)
