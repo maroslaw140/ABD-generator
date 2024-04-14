@@ -46,8 +46,8 @@ class Zamowienie:
 
     def pobierz_statusy_zamowienia_fk(self):
         try:
-            self.kursor.execute("SELECT id_status_zamowienia FROM status_zamowienia")
-            self.statusy_zamowienia_fk = [id_status_zamowienia[0] for id_status_zamowienia in self.kursor.fetchall()]
+            self.kursor.execute("SELECT id_status_zamowienia AS status FROM status_zamowienia")
+            self.statusy_zamowienia_fk = [status[0] for status in self.kursor.fetchall()]
         except cx_Oracle.Error as error:
             print(error)
             funkcje.zapisz_blad(error)
@@ -71,8 +71,8 @@ class Zamowienie:
                     'data_realizacji': data_realizacji,
                     'data_wyslania': data_wyslania,
                     'id_pracownik_realizujacy': random.choice(self.pracownicy_fk),
-                    'id_sposob_dostawy': random.choice(self.sposoby_dostawy_fk),
-                    'id_status_zamowienia': random.choice(self.statusy_zamowienia_fk),
+                    'id_sposob_dostawy': random.randint(1, 5),
+                    'id_status_zamowienia': random.randint(1, 5),
                 }
                 self.dane_do_wstawienia.append(zamowienie)
 

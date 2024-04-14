@@ -10,7 +10,7 @@ class Pracownik:
 
     def pobierz_stanowiska_fk(self):
         try:
-            self.kursor.execute("SELECT DISTINCT id_stanowisko FROM stanowisko")
+            self.kursor.execute("SELECT id_stanowisko FROM stanowisko")
             self.stanowiska_fk = [id_stanowisko[0] for id_stanowisko in self.kursor.fetchall()]
         except cx_Oracle.Error as error:
             print(error)

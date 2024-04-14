@@ -53,7 +53,7 @@ class Ksiazka:
                 self.dane_do_wstawienia.append(ksiazka)
 
             self.kursor.executemany("""
-                                INSERT INTO klient (id_autor, tytul, id_seria, id_kategoria)
+                                INSERT INTO ksiazka (id_autor, tytul, id_seria, id_kategoria)
                                 VALUES (:id_autor, :tytul, :id_seria, :id_kategoria)""", self.dane_do_wstawienia)
 
             self.kursor.connection.commit()
