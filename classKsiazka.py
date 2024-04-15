@@ -41,17 +41,11 @@ class Ksiazka:
     def generuj_dane(self, liczba_danych=1):
         try:
             for _ in range(liczba_danych):
-                czy_seria = random.choice([True, False])
-
-                if czy_seria:
-                    id_seria = random.choice(self.serie_fk)
-                else:
-                    id_seria = None
 
                 ksiazka = {
                     'id_autor': random.choice(self.autorzy_fk),
                     'tytul': funkcje.losowy_ciag(255, True, False),
-                    'id_seria': id_seria,
+                    'id_seria': random.choice(self.serie_fk),
                     'id_kategoria': random.choice(self.kategorie_fk),
                 }
                 self.dane_do_wstawienia.append(ksiazka)
