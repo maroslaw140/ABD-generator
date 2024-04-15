@@ -24,6 +24,7 @@ class Generator:
     def __init__(self):
         self.kursor = None
         self.plik = "plik.txt"
+        self.tabele = [Kategoria, Seria, Autor, Adres, Stanowisko, Wydawnictwo, Pracownik, Klient, Ksiazka, Wydanie, Opinia, Zamowienie, Rachunek, ZamowieniePozycja]
 
     def polacz(self):
         try:
@@ -64,10 +65,11 @@ class Generator:
 
     def dodaj_do_wszystkich_tabel(self):
         liczba_danych = int(input("Podaj ilość rekordów do wstawienia: "))
-        for tabela in [Kategoria, Seria, Autor, Adres, Stanowisko, Wydawnictwo, Pracownik, Klient, Ksiazka, Wydanie, Opinia, ZamowieniePozycja]:
+        for tabela in self.tabele:
             tabela = tabela(self.kursor)
             tabela.wstaw_dane(liczba_danych)
             print(f"{tabela.nazwa_tabeli} - wstawiono {tabela.kursor.rowcount} rekordów.")
+            self.zapisz_insert_do_pliku(tabela.insert, tabela.dane_do_wstawienia)
 
     def dodaj_do_jednej_tabeli(self):
         print("Wybierz tabelę:")
@@ -80,6 +82,8 @@ class Generator:
             tabela = Kategoria
         elif wybor_tabeli == '2':
             tabela = Seria
+        elif wybor_tabeli == '3':
+            tabela = Ksiazka
         else:
             print("Niepoprawny wybór tabeli.")
             return
@@ -88,3 +92,4 @@ class Generator:
         tabela = tabela(self.kursor)
         tabela.wstaw_dane(liczba_danych)
         print(f"{tabela.nazwa_tabeli} - wstawiono {tabela.kursor.rowcount} rekordów.")
+        self.zapisz_insert_do_pliku(tabela.insert, tabela.dane_do_wstawienia)
