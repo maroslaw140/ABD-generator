@@ -10,6 +10,7 @@ class ZamowieniePozycja:
         self.wydania_fk = []
         self.dane_do_wstawienia = []
 
+        self.nazwa_tabeli = "zamowienie_pozycja"
         self.insert = """INSERT INTO zamowienie_pozycja (id_zamowienie, id_wydanie, liczba_sztuk) VALUES ('{id_zamowienie}', '{id_wydanie}', '{liczba_sztuk}')"""
 
     def pobierz_zamowienia_fk(self):
@@ -48,3 +49,13 @@ class ZamowieniePozycja:
             print(error)
             funkcje.zapisz_blad(error)
             self.kursor.connection.rollback()
+
+    def wstaw_dane(self, liczba_danych=1):
+        try:
+            self.pobierz_zamowienia_fk()
+            self.pobierz_wydania_fk()
+            self.generuj_dane(liczba_danych)
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)

@@ -7,6 +7,7 @@ class Autor:
         self.kursor = kursor
         self.dane_do_wstawienia = []
 
+        self.nazwa_tabeli = "autor"
         self.insert = """INSERT INTO autor (imie, nazwisko) VALUES ('{imie}', '{nazwisko}')"""
 
     def generuj_dane(self, liczba_danych=1):
@@ -29,3 +30,11 @@ class Autor:
             print(error)
             funkcje.zapisz_blad(error)
             self.kursor.connection.rollback()
+
+    def wstaw_dane(self, liczba_danych=1):
+        try:
+            self.generuj_dane(liczba_danych)
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)

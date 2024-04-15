@@ -9,6 +9,7 @@ class Pracownik:
         self.stanowiska_fk = []
         self.dane_do_wstawienia = []
 
+        self.nazwa_tabeli = "pracownik"
         self.insert = """INSERT INTO pracownik (imie, nazwisko, telefon, mail, id_stanowisko, data_zatrudnienia) VALUES (:imie, :nazwisko, :telefon, :mail, :id_stanowisko, '{data_zatrudnienia}')"""
 
     def pobierz_stanowiska_fk(self):
@@ -43,3 +44,12 @@ class Pracownik:
             print(error)
             funkcje.zapisz_blad(error)
             self.kursor.connection.rollback()
+
+    def wstaw_dane(self, liczba_danych=1):
+        try:
+            self.pobierz_stanowiska_fk()
+            self.generuj_dane(liczba_danych)
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)

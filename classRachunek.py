@@ -11,6 +11,7 @@ class Rachunek:
         self.sposoby_zaplaty_fk = []
         self.dane_do_wstawienia = []
 
+        self.nazwa_tabeli = "rachunek"
         self.insert = """INSERT INTO rachunek (id_zamowienie, data_wystawienia, id_sposob_zaplaty) VALUES ('{id_zamowienie}', '{data_wystawienia}', '{id_sposob_zaplaty}')"""
 
     def pobierz_zamowienia_fk(self):
@@ -67,3 +68,14 @@ class Rachunek:
             print(error)
             funkcje.zapisz_blad(error)
             self.kursor.connection.rollback()
+
+    def wstaw_dane(self, liczba_danych=1):
+        try:
+            self.pobierz_zamowienia_fk()
+            self.pobierz_wykorzystane_zamowienia_fk()
+            self.pobierz_sposoby_zaplaty_fk()
+            self.generuj_dane(liczba_danych)
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)

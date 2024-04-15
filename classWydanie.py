@@ -10,6 +10,7 @@ class Wydanie:
         self.wydawnictwa_fk = []
         self.dane_do_wstawienia = []
 
+        self.nazwa_tabeli = "wydanie"
         self.insert = """INSERT INTO wydanie (id_ksiazka, isbn, data_wydania, liczba_stron, id_wydawnictwo, cena, wysokosc_mm, dlugosc_mm, szerokosc_mm, liczba_sztuk_mag) VALUES ({id_ksiazka}, '{isbn}', '{data_wydania}', {liczba_stron}, {id_wydawnictwo}, {cena}, {wysokosc_mm}, {dlugosc_mm}, {szerokosc_mm}, {liczba_sztuk_mag})"""
 
     def pobierz_ksiazki_fk(self):
@@ -56,3 +57,13 @@ class Wydanie:
             print(error)
             funkcje.zapisz_blad(error)
             self.kursor.connection.rollback()
+
+    def wstaw_dane(self, liczba_danych=1):
+        try:
+            self.pobierz_ksiazki_fk()
+            self.pobierz_wydawnictwa_fk()
+            self.generuj_dane(liczba_danych)
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)

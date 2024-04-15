@@ -7,6 +7,7 @@ class Klient:
         self.kursor = kursor
         self.dane_do_wstawienia = []
 
+        self.nazwa_tabeli = "klient"
         self.insert = """INSERT INTO klient (imie, nazwisko, telefon, mail) VALUES ('{imie}', '{nazwisko}', '{telefon}', '{mail}')"""
 
     def generuj_dane(self, liczba_danych=1):
@@ -30,3 +31,11 @@ class Klient:
             print(error)
             funkcje.zapisz_blad(error)
             self.kursor.connection.rollback()
+
+    def wstaw_dane(self, liczba_danych=1):
+        try:
+            self.generuj_dane(liczba_danych)
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)

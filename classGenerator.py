@@ -2,6 +2,22 @@ import cx_Oracle
 from dotenv import load_dotenv
 import os
 
+from classAdres import Adres
+from classAutor import Autor
+from classKategoria import Kategoria
+from classKlient import Klient
+from classKsiazka import Ksiazka
+from classOpinia import Opinia
+from classPracownik import Pracownik
+from classRachunek import Rachunek
+from classSeria import Seria
+from classStanowisko import Stanowisko
+from classUzytkownik import Uzytkownik
+from classWydanie import Wydanie
+from classWydawnictwo import Wydawnictwo
+from classZamowienie import Zamowienie
+from classZamowieniePozycja import ZamowieniePozycja
+
 
 class Generator:
 
@@ -31,3 +47,44 @@ class Generator:
                     file.write(linia_insert)
         except IOError as error:
             print("Błąd zapisu do pliku:", error)
+
+
+    def uruchom(self):
+        print("Wybierz opcję:")
+        print("1. Dodaj do wszystkich tabel")
+        print("2. Dodaj do jednej tabeli")
+        wybor = input("Twój wybór: ")
+
+        if wybor == '1':
+            self.dodaj_do_wszystkich_tabel()
+        elif wybor == '2':
+            self.dodaj_do_jednej_tabeli()
+        else:
+            print("Niepoprawny wybór.")
+
+    def dodaj_do_wszystkich_tabel(self):
+        liczba_danych = int(input("Podaj ilość rekordów do wstawienia: "))
+        for tabela in [Kategoria, Seria, Autor, Adres, Stanowisko, Wydawnictwo, Pracownik, Klient, Ksiazka, Wydanie, Opinia, ZamowieniePozycja]:
+            tabela = tabela(self.kursor)
+            tabela.wstaw_dane(liczba_danych)
+            print(f"{tabela.nazwa_tabeli} - wstawiono {tabela.kursor.rowcount} rekordów.")
+
+    def dodaj_do_jednej_tabeli(self):
+        print("Wybierz tabelę:")
+        print("1. Kategoria")
+        print("2. Seria")
+        # Dodaj pozostałe opcje wyboru tabeli
+        wybor_tabeli = input("Twój wybór: ")
+
+        if wybor_tabeli == '1':
+            tabela = Kategoria
+        elif wybor_tabeli == '2':
+            tabela = Seria
+        else:
+            print("Niepoprawny wybór tabeli.")
+            return
+
+        liczba_danych = int(input("Podaj ilość rekordów do wstawienia: "))
+        tabela = tabela(self.kursor)
+        tabela.wstaw_dane(liczba_danych)
+        print(f"{tabela.nazwa_tabeli} - wstawiono {tabela.kursor.rowcount} rekordów.")

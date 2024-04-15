@@ -10,6 +10,7 @@ class Opinia:
         self.klienci_fk = []
         self.dane_do_wstawienia = []
 
+        self.nazwa_tabeli = "opinia"
         self.insert = """INSERT INTO opinia (id_wydanie, id_klient, tresc, ocena, data_wystawienia) VALUES (:id_wydanie, :id_klient, '{tresc}', {ocena}, '{data_wystawienia}')"""
 
     def pobierz_wydania_fk(self):
@@ -51,3 +52,13 @@ class Opinia:
             print(error)
             funkcje.zapisz_blad(error)
             self.kursor.connection.rollback()
+
+    def wstaw_dane(self, liczba_danych=1):
+        try:
+            self.pobierz_wydania_fk()
+            self.pobierz_klienci_fk()
+            self.generuj_dane(liczba_danych)
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)

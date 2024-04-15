@@ -11,6 +11,7 @@ class Ksiazka:
         self.kategorie_fk = []
         self.dane_do_wstawienia = []
 
+        self.nazwa_tabeli = "ksiazka"
         self.insert = """INSERT INTO ksiazka (id_autor, tytul, id_seria, id_kategoria) VALUES ('{id_autor}', '{tytul}', '{id_seria}', '{id_kategoria}')"""
 
     def pobierz_autorzy_fk(self):
@@ -65,3 +66,14 @@ class Ksiazka:
             print(error)
             funkcje.zapisz_blad(error)
             self.kursor.connection.rollback()
+
+    def wstaw_dane(self, liczba_danych=1):
+        try:
+            self.pobierz_autorzy_fk()
+            self.pobierz_serie_fk()
+            self.pobierz_kategorie_fk()
+            self.generuj_dane(liczba_danych)
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)

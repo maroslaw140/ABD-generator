@@ -11,6 +11,7 @@ class Uzytkownik:
         self.status_uzytkownika_fk = []
         self.dane_do_wstawienia = []
 
+        self.nazwa_tabeli = "uzytkownik"
         self.insert = """INSERT INTO uzytkownik (login, haslo, id_pracownik, id_klient, id_status_uzytkownika, data_rejestracji) VALUES ('{login}', '{haslo}', '{id_pracownik}', '{id_klient}', '{id_status_uzytkownika}', '{data_rejestracji}')"""
 
     def pobierz_pracownicy_fk(self):
@@ -84,3 +85,14 @@ class Uzytkownik:
             print(error)
             funkcje.zapisz_blad(error)
             self.kursor.connection.rollback()
+
+    def wstaw_dane(self, liczba_danych=1):
+        try:
+            self.pobierz_pracownicy_fk()
+            self.pobierz_klienci_fk()
+            self.pobierz_status_uzytkownika_fk()
+            self.generuj_dane(liczba_danych)
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)

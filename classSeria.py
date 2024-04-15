@@ -8,6 +8,7 @@ class Seria:
         self.serie = []
         self.dane_do_wstawienia = []
 
+        self.nazwa_tabeli = "seria"
         self.insert = """INSERT INTO seria (nazwa) VALUES ('{nazwa}')"""
 
     def pobierz_nazwy(self):
@@ -36,3 +37,12 @@ class Seria:
             print(error)
             funkcje.zapisz_blad(error)
             self.kursor.connection.rollback()
+
+    def wstaw_dane(self, liczba_danych=1):
+        try:
+            self.pobierz_nazwy()
+            self.generuj_dane(liczba_danych)
+
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)
