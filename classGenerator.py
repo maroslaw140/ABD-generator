@@ -73,19 +73,43 @@ class Generator:
 
     def dodaj_do_jednej_tabeli(self):
         print("Wybierz tabelę:")
-        print("1. Kategoria")
-        print("2. Seria")
-        # Dodaj pozostałe opcje wyboru tabeli
+
+        for idx, tabela in enumerate(self.tabele, start=1):
+            print(f"{idx}. {tabela.__name__}")
+
+
         wybor_tabeli = input("Twój wybór: ")
 
-        if wybor_tabeli == '1':
+        if wybor_tabeli == '1' or wybor_tabeli == 'Kategoria':
             tabela = Kategoria
-        elif wybor_tabeli == '2':
+        elif wybor_tabeli == '2' or wybor_tabeli == 'Seria':
             tabela = Seria
-        elif wybor_tabeli == '3':
-            tabela = Ksiazka
-        elif wybor_tabeli == '4':
+        elif wybor_tabeli == '3' or wybor_tabeli == 'Autor':
+            tabela = Autor
+        elif wybor_tabeli == '4' or wybor_tabeli == 'Adres':
+            tabela = Adres
+        elif wybor_tabeli == '5' or wybor_tabeli == 'Stanowisko':
+            tabela = Stanowisko
+        elif wybor_tabeli == '6' or wybor_tabeli == 'Wydawnictwo':
+            tabela = Wydawnictwo
+        elif wybor_tabeli == '7' or wybor_tabeli == 'Pracownik':
+            tabela = Pracownik
+        elif wybor_tabeli == '8' or wybor_tabeli == 'Klient':
+            tabela = Klient
+        elif wybor_tabeli == '9' or wybor_tabeli == 'Uzytkownik':
             tabela = Uzytkownik
+        elif wybor_tabeli == '10' or wybor_tabeli == 'Ksiazka':
+            tabela = Ksiazka
+        elif wybor_tabeli == '11' or wybor_tabeli == 'Wydanie':
+            tabela = Wydanie
+        elif wybor_tabeli == '12' or wybor_tabeli == 'Opinia':
+            tabela = Opinia
+        elif wybor_tabeli == '13' or wybor_tabeli == 'Zamowienie':
+            tabela = Zamowienie
+        elif wybor_tabeli == '14' or wybor_tabeli == 'Rachunek':
+            tabela = Rachunek
+        elif wybor_tabeli == '15' or wybor_tabeli == 'ZamowieniePozycja':
+            tabela = ZamowieniePozycja
         else:
             print("Niepoprawny wybór tabeli.")
             return

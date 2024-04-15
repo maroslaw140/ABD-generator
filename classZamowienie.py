@@ -63,11 +63,6 @@ class Zamowienie:
                 data_realizacji = funkcje.generuj_date(50)
                 data_wyslania = funkcje.generuj_date(1)
 
-                while data_realizacji < data_zamowienia or data_wyslania < data_realizacji:
-                    data_zamowienia = funkcje.generuj_date(100)
-                    data_realizacji = funkcje.generuj_date(50)
-                    data_wyslania = funkcje.generuj_date(1)
-
                 zamowienie = {
                     'id_klient': random.choice(self.klienci_fk),
                     'id_adres': random.choice(self.adresy_fk),
@@ -75,8 +70,8 @@ class Zamowienie:
                     'data_realizacji': data_realizacji,
                     'data_wyslania': data_wyslania,
                     'id_pracownik_realizujacy': random.choice(self.pracownicy_fk),
-                    'id_sposob_dostawy': random.randint(1, 5),
-                    'id_status_zamowienia': random.randint(1, 5),
+                    'id_sposob_dostawy': random.choice(self.sposoby_dostawy_fk),
+                    'id_status_zamowienia': random.choice(self.statusy_zamowienia_fk),
                 }
                 self.dane_do_wstawienia.append(zamowienie)
 
