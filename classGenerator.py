@@ -24,7 +24,7 @@ class Generator:
     def __init__(self):
         self.kursor = None
         self.plik = "plik.txt"
-        self.tabele = [Kategoria, Seria, Autor, Adres, Stanowisko, Wydawnictwo, Pracownik, Klient, Ksiazka, Wydanie, Opinia, Zamowienie, Rachunek, ZamowieniePozycja]
+        self.tabele = [Kategoria, Seria, Autor, Adres, Stanowisko, Wydawnictwo, Pracownik, Klient, Uzytkownik, Ksiazka, Wydanie, Opinia, Zamowienie, Rachunek, ZamowieniePozycja]
 
     def polacz(self):
         try:
@@ -84,6 +84,8 @@ class Generator:
             tabela = Seria
         elif wybor_tabeli == '3':
             tabela = Ksiazka
+        elif wybor_tabeli == '4':
+            tabela = Uzytkownik
         else:
             print("Niepoprawny wybór tabeli.")
             return
