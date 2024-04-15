@@ -10,6 +10,7 @@ class Uzytkownik:
         self.klienci_fk = []
         self.status_uzytkownika_fk = []
         self.dane_do_wstawienia = []
+        self.loginy = []
 
         self.nazwa_tabeli = "uzytkownik"
         self.insert = """INSERT INTO uzytkownik (login, haslo, id_pracownik, id_klient, id_status_uzytkownika, data_rejestracji) VALUES ('{login}', '{haslo}', '{id_pracownik}', '{id_klient}', '{id_status_uzytkownika}', '{data_rejestracji}')"""
@@ -39,9 +40,24 @@ class Uzytkownik:
             print(error)
             funkcje.zapisz_blad(error)
 
+    def pobierz_loginy(self):
+        try:
+            self.kursor.execute("SELECT login FROM uzytkownik")
+            self.loginy = [login[0] for login in self.kursor.fetchall()]
+        except cx_Oracle.Error as error:
+            print(error)
+            funkcje.zapisz_blad(error)
+
     def generuj_dane(self, liczba_danych=1):
         try:
             for _ in range(liczba_danych):
+
+                login = funkcje.losowy_ciag(20, False, True)
+
+                while login in self.loginy:
+                    login = funkcje.losowy_ciag(20, False, True)
+
+                self.loginy.append(login)
 
                 if self.klienci_fk and self.pracownicy_fk:
                     typ = random.choice(["klient", "pracownik"])
@@ -65,7 +81,7 @@ class Uzytkownik:
                     continue
 
                 uzytkownik = {
-                    'login': funkcje.losowy_ciag(20, False, True),
+                    'login': login,
                     'haslo': funkcje.losowy_ciag(255, False, True),
                     'id_pracownik': id_pracownik,
                     'id_klient': id_klient,
@@ -91,6 +107,7 @@ class Uzytkownik:
             self.pobierz_pracownicy_fk()
             self.pobierz_klienci_fk()
             self.pobierz_status_uzytkownika_fk()
+            self.pobierz_loginy()
             self.generuj_dane(liczba_danych)
 
         except cx_Oracle.Error as error:
