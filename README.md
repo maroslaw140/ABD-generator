@@ -1,4 +1,4 @@
-# APK-DB-generator
+# ABD-generator
 generator danych symulujący działanie aplikacji
 
 https://www.oracle.com/pl/database/technologies/instant-client/winx64-64-downloads.html
